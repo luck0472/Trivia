@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // Add code to check answers to questions
+
+            // For MCQ
+            function check(content) {
+
+                const correctPlaceholder = document.getElementById("correctCapital");
+
+                if (content.innerText != "New Delhi") {
+                    content.style.background = "red";
+                    correctPlaceholder.innerText = "incorrect";
+                } else {
+                    content.style.background = "green";
+                    correctPlaceholder.innerText = "Correct";
+                }
+            }
+
+            // for the Free Answer
+            function checkSmart() {
+                const correctPlaceholder = document.getElementById("correctResponse");
+                const freeResponse = document.getElementById("free");
+
+                if (freeResponse.value != "Subcribe") {
+                    correctPlaceholder.innerText = "Incorrect";
+                    freeResponse.style.background = "red";
+                } else {
+                    correctPlaceholder.innerText = "Correct";
+                    freeResponse.style.background = "green";
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- Add multiple choice question here -->
+                <h3>What is the capital of India?</h3>
+                <p id="correctCapital"></p>
+                <button onclick="check(this)">Mumbai</button>
+                <button onclick="check(this)">New Delhi</button>
+                <button onclick="check(this)">Rajkot</button>
+                <button onclick="check(this)">Morbi</button>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!--  Add free response question here -->
+                <h3>What should a smart person do?</h3>
+                <p id="correctResponse"></p>
+                <form>
+                    <input type="text" id="free">
+                </form>
+                <button onclick="checkSmart()">Check Answer</button>
+            </div>
+        </div>
+    </body>
+
+</html>
