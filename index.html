@@ -3,40 +3,12 @@
 <html lang="en">
 
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
         <title>Trivia!</title>
-        <script>
-            // Add code to check answers to questions
-
-            // For MCQ
-            function check(content) {
-
-                const correctPlaceholder = document.getElementById("correctCapital");
-
-                if (content.innerText != "New Delhi") {
-                    content.style.background = "red";
-                    correctPlaceholder.innerText = "incorrect";
-                } else {
-                    content.style.background = "green";
-                    correctPlaceholder.innerText = "Correct";
-                }
-            }
-
-            // for the Free Answer
-            function checkSmart() {
-                const correctPlaceholder = document.getElementById("correctResponse");
-                const freeResponse = document.getElementById("free");
-
-                if (freeResponse.value != "Subcribe") {
-                    correctPlaceholder.innerText = "Incorrect";
-                    freeResponse.style.background = "red";
-                } else {
-                    correctPlaceholder.innerText = "Correct";
-                    freeResponse.style.background = "green";
-                }
-            }
-        </script>
+        <script src="script.js"> </script>
     </head>
 
     <body>
