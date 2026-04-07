@@ -1,7 +1,7 @@
 const API_BASE_URL = 'https://opentdb.com/api.php';
 const q = selector => document.querySelector(selector);
 const qAll = selector => document.querySelectorAll(selector);
-const DIFFICULTY_TIMERS = { easy: 12, medium: 8, hard: 5 };
+const DIFFICULTY_TIMERS = { easy: 5, medium: 8, hard: 12 };
 const quizState = { questions: [], results: [], answeredCount: 0, timerId: null, timeLeft: 0 };
 
 const getQuizSettings = () => {
