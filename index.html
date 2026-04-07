@@ -1,47 +1,90 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-        <link href="styles.css" rel="stylesheet">
-        <title>Trivia!</title>
-        <script src="script.js"> </script>
-    </head>
-
-    <body>
-        <div class="header">
-            <h1>Trivia!</h1>
-        </div>
-
-        <div class="container">
-            <div class="section">
-                <h2>Part 1: Multiple Choice </h2>
-                <hr>
-                <!-- Add multiple choice question here -->
-                <h3>What is the capital of India?</h3>
-                <p id="correctCapital"></p>
-                <button onclick="check(this)">Mumbai</button>
-                <button onclick="check(this)">New Delhi</button>
-                <button onclick="check(this)">Rajkot</button>
-                <button onclick="check(this)">Morbi</button>
-
-            </div>
-
-            <div class="section">
-                <h2>Part 2: Free Response</h2>
-                <hr>
-                <!--  Add free response question here -->
-                <h3>What should a smart person do?</h3>
-                <p id="correctResponse"></p>
-                <form>
-                    <input type="text" id="free">
-                </form>
-                <button onclick="checkSmart()">Check Answer</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div>
+                    <h1 class="navbar-brand mb-0 fs-3 d-inline-flex align-items-center">
+                        Trivia
+                        <span class="badge bg-light text-primary ms-2 header-badge">Quiz App</span>
+                    </h1>
+                    <p class="mb-0 text-light small header-subtitle">Play quick questions and challenge your knowledge</p>
+                </div>
+                <button class="btn btn-outline-light btn-sm dark-mode-btn" onclick="toggleDarkMode()">Dark Mode</button>
             </div>
         </div>
-    </body>
+    </nav>
 
+    <div class="container my-5">
+        <!-- Quiz Settings -->
+        <div class="card mb-4" id="settings-card">
+            <div class="card-body">
+                <h2 class="card-title">Quiz Settings</h2>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="question-count" class="form-label">Number of questions</label>
+                        <input type="number" id="question-count" class="form-control" value="10" min="1" max="50">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="question-difficulty" class="form-label">Difficulty</label>
+                        <select id="question-difficulty" class="form-select">
+                            <option value="">Any Difficulty</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-3" onclick="loadQuizQuestionsFromSettings()">Load Questions</button>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Trivia Questions</h2>
+                <hr>
+                <div id="quiz-container">
+                    <p id="quiz-status" class="text-center text-muted">Click "Load Questions" to start!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer mt-5">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    <p class="mb-1 text-light small">Play fun trivia and sharpen your knowledge with every round.</p>
+                    <p class="mb-0 text-light small">&copy; 2026 Trivia App. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="footer-link">
+                        <span class="footer-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.024-3.036-1.849-3.036-1.85 0-2.134 1.445-2.134 2.939v5.666H9.356V9h3.414v1.561h.049c.476-.9 1.636-1.849 3.366-1.849 3.598 0 4.263 2.368 4.263 5.451v6.289zM5.337 7.433c-1.144 0-2.069-.926-2.069-2.069 0-1.142.925-2.069 2.069-2.069 1.142 0 2.069.927 2.069 2.069 0 1.143-.927 2.069-2.069 2.069zM6.779 20.452H3.897V9h2.882v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                            </svg>
+                        </span>
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
