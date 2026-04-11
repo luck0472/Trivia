@@ -72,6 +72,18 @@ body.dark-mode h3 {
     color: var(--text-light);
 }
 
+#quiz-status {
+    color: #5f6b7a !important;
+}
+
+body.dark-mode #quiz-status {
+    color: #d8e4ff !important;
+}
+
+body.dark-mode .text-muted {
+    color: #c7d4ee !important;
+}
+
 #quiz-timer {
     display: flex;
     align-items: center;

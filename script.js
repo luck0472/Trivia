@@ -1,7 +1,7 @@
 const API_BASE_URL = 'https://opentdb.com/api.php';
 const q = selector => document.querySelector(selector);
 const qAll = selector => document.querySelectorAll(selector);
-const DIFFICULTY_TIMERS = { easy: 12, medium: 8, hard: 5 };
+const DIFFICULTY_TIMERS = { easy: 5, medium: 8, hard: 12 };
 const quizState = { questions: [], results: [], answeredCount: 0, timerId: null, timeLeft: 0 };
 
 const getQuizSettings = () => {
@@ -212,14 +212,35 @@ function handleAnswerClick(event) {
 }
 
 async function loadQuizQuestions(apiUrl) {
-    const status = q('#quiz-status');
     const container = q('#quiz-container');
+    let status = q('#quiz-status');
+
+    if (!status) {
+        container.innerHTML = '<p id="quiz-status" class="text-center text-muted">Loading questions...</p>';
+        status = q('#quiz-status');
+    }
+
     status.textContent = 'Loading questions…';
+    status.className = 'text-center text-muted';
 
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        if (!data.results || data.results.length === 0) throw new Error('No questions returned from the API.');
+
+        if (data.response_code && data.response_code !== 0) {
+            const apiErrors = {
+                1: 'No questions matched your filters. Try a different difficulty or fewer questions.',
+                2: 'Invalid API request. Please verify quiz settings and try again.',
+                3: 'Session token not found. Please try again.',
+                4: 'No more questions available for this session. Please try again later.',
+                5: 'Too many requests. Please wait a moment and retry.'
+            };
+            throw new Error(apiErrors[data.response_code] || 'Unexpected API response.');
+        }
+
+        if (!Array.isArray(data.results) || data.results.length === 0) {
+            throw new Error('No questions returned from the API.');
+        }
 
         quizState.questions = data.results;
         quizState.answeredCount = 0;
@@ -237,8 +258,8 @@ function loadQuizQuestionsFromSettings() {
     const { amount } = getQuizSettings();
     const container = q('#quiz-container');
 
-    if (amount < 1 || amount > 50 || Number.isNaN(amount)) {
-        container.innerHTML = '<p class="text-center text-danger">Please select between 1 to 50 questions.</p>';
+    if (!Number.isInteger(amount) || amount < 1 || amount > 50) {
+        container.innerHTML = '<p id="quiz-status" class="text-center text-danger">Please select between 1 to 50 questions.</p>';
         return;
     }
 
