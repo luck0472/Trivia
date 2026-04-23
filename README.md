@@ -1,34 +1,43 @@
-# Trivia
+# Trivia Quiz App
 
-A small, static web-based trivia game and demo built with plain HTML and CSS. This repository contains the UI and styling for a lightweight trivia experience you can open in any modern browser — no backend required.
+A responsive, mobile-first trivia/quiz web app built with vanilla JavaScript and Bootstrap. Users can choose quiz settings (number of questions and difficulty), answer dynamically loaded questions, view their score at the end, and switch between light/dark mode for better accessibility.
 
-## About
+## Live Demo
 
-Trivia is a static front-end project that showcases an interactive trivia UI. It focuses on clean markup and responsive styling so the game works well on desktop and mobile browsers.
-
-This repo is primarily HTML (≈67%) and CSS (≈33%), so it's ideal for learning or customizing front-end behavior without any server setup.
-
----
-
-## Demo
-
-If the repository contains an `index.html`, open it in your browser to try the game. If a hosted demo is available (GitHub Pages, Netlify, etc.), add the link here.
-
----
+- https://luck0472.github.io/Trivia/
 
 ## Features
 
-- Simple, responsive trivia UI
-- Clean semantic HTML structure
-- Modern CSS layout (Flexbox / Grid)
-- Lightweight and dependency-free
-- Easy to extend with JS or a backend if desired
+- Quiz setup flow: select question count and difficulty
+- Dynamic question rendering with multiple-choice answers
+- Score tracking and results summary
+- Dark mode toggle
+- Responsive UI using Bootstrap
 
----
+## Tech Stack
 
-## Tech stack
+- JavaScript
+- HTML
+- CSS
+- Bootstrap
 
-- HTML — markup and content
-- CSS — styling and layout
+## Getting Started
 
-No build tools or runtime dependencies are required for the core experience.
+### Run locally
+
+1. Clone the repository
+2. Open `index.html` in your browser
+
+## Project Structure (example)
+
+- `index.html` — main page
+- `style.css` — custom styles
+- `script.js` — quiz logic
+
+## Credits
+
+- Trivia questions provided via a public trivia API (if applicable)
+
+## License
+
+This project is open source. Add a license if you plan to reuse or distribute it. 
